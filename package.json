@@ -1,0 +1,14 @@
+{
+  "name": "bucefalo-utils",
+  "title": "Bucefalo Utils",
+  "description": "Bucefalo Utilities for JavaScript.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/picanteverde/bucefalo-utils",
+  "author": {
+    "name": "Alejandro Hernandez (aka picanteverde)"
+  },
+  "dependencies": {
+      "mocha": ">= 1.1.0",
+      "chai": ">= 1.0.4"
+  }
+}
