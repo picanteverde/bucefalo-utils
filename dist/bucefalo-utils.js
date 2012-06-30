@@ -1,4 +1,4 @@
-/*! Bucefalo Utils - v0.1.0 - 2012-06-27
+/*! Bucefalo Utils - v0.1.0 - 2012-06-29
 * https://github.com/picanteverde/bucefalo-utils
 */
 
@@ -152,4 +152,28 @@ bucefalo.cache.async = function(db){
 			});
 		};
 	};	
+};
+
+bucefalo.monads = {
+	compose: function(f, g){
+		return function(x){
+			return g(f(x));
+		};
+	}
+};
+bucefalo.monads.list = {
+	bind: function(f){
+		return function(list){
+			var i = list.length,
+				l = i,
+				output = [];
+			while(i--){
+				output = output.concat(f(list[l - i -1]));
+			}
+			return output;
+		};
+	},
+	unit: function(x){
+		return [x];
+	}
 };
