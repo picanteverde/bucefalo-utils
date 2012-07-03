@@ -32,4 +32,28 @@ describe ("Bucefalo Monads List", function(){
 		expect(ret[5]).to.equal("o");
 	});
 
+	it("should allow me to pipe functions", function(){
+		var fn0 = function (n){
+				return [n-10, n+10];
+			},
+			fn1 = function (n){
+				return [n -5, n+5];
+			},
+			fn2 = function (n){
+				return [n -2, n+2];
+			},
+			arr = bucefalo.monads.list.pipe([fn0,fn1,fn2])(0);
+			expect(arr[0]).to.equal(-17);
+			expect(arr[1]).to.equal(-13);
+			expect(arr[2]).to.equal(-7);
+			expect(arr[3]).to.equal(-3);
+			expect(arr[4]).to.equal(3);
+			expect(arr[5]).to.equal(7);
+			expect(arr[6]).to.equal(13);
+			expect(arr[7]).to.equal(17);
+	});
+
+
+
+
 });

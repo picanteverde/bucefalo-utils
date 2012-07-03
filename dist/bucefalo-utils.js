@@ -1,4 +1,4 @@
-/*! Bucefalo Utils - v0.1.0 - 2012-06-29
+/*! Bucefalo Utils - v0.1.0 - 2012-07-02
 * https://github.com/picanteverde/bucefalo-utils
 */
 
@@ -159,21 +159,61 @@ bucefalo.monads = {
 		return function(x){
 			return g(f(x));
 		};
+	},
+	pipe: function(fns){
+		var l = fns.length - 1;
+		return function (x){
+			var i = fns.length;
+			while(i--){
+				x = fns[l - i](x);
+			}
+			return x;
+		};
+	},
+	pipex: function(x, fns){
+		var i = fns.length,
+			l = i - 1;
+		while(i--){
+			x = fns[l - i](x);
+		}
+		return x;
+	},
+	bindfns: function(fns, bind){
+		var i = fns.length;
+		while(i--){
+			fns[i] = bind(fns[i]);
+		}
+		return fns;
+	},
+	pipebindunit: function(fns, bind, unit){
+		return this.compose(unit, this.pipe(this.bindfns(fns, bind)));
 	}
 };
 bucefalo.monads.list = {
 	bind: function(f){
 		return function(list){
 			var i = list.length,
-				l = i,
+				l = i - 1,
 				output = [];
 			while(i--){
-				output = output.concat(f(list[l - i -1]));
+				output = output.concat(f(list[l - i]));
 			}
 			return output;
 		};
 	},
+	bindx: function(list, f){
+		var i = list.length,
+			l = i - 1,
+			output = [];
+			while(i--){
+				output = output.concat(f(list[l - i]));
+			}
+		return output;
+	},
 	unit: function(x){
 		return [x];
+	},
+	pipe: function(fns){
+		return bucefalo.monads.pipebindunit(fns, this.bind, this.unit);
 	}
 };
