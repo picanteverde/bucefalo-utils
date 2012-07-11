@@ -71,7 +71,7 @@ Monads is a design patter for functions that receives monadic values.
 
 ### Promise Monads
 
-var mock ={
+	var mock ={
 		//readFile :: String -> Promise String
 		readFile: function(path){
 			var promiseString = bucefalo.promise();
