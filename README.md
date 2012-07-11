@@ -19,6 +19,8 @@ How to use
 ------------
 
 ### Dictionary 
+Some times you need a dictionary structure like any object in javascript but with out the need to loop it without the annoyning hasOwnProperty check inside,
+and even better with the speed of the indexOf native implemented in the array
 	var d = bucefalo.dictionary();
 	d.add("key1", "value1");
 	d.add("key2", "value2");
@@ -33,6 +35,8 @@ How to use
 
 Monads
 ------
+Monads is a design patter for functions that receives monadic values.
+
 
 ### List Monads
 	var convert = [
@@ -63,4 +67,48 @@ Monads
 		expect(ret[3]).to.equal("t");
 		expect(ret[4]).to.equal("w");
 		expect(ret[5]).to.equal("o");
+	});
+
+### Promise Monads
+
+var mock ={
+		//readFile :: String -> Promise String
+		readFile: function(path){
+			var promiseString = bucefalo.promise();
+			setTimeout(function(){
+				promiseString.succeed('{"name": "bucefalo", "url":"https://github.com/picanteverde/bucefalo-utils"}');
+			}, 100);
+			return promiseString;
+		},
+		//JSONparse :: String -> Promise Object
+		JSONparse: function(json){
+			var promiseObject = bucefalo.promise();
+			setTimeout(function(){
+				promiseObject.succeed(JSON.parse(json));
+			},100);
+			return promiseObject;
+		},
+		//getUrl :: Object -> Promise String
+		getUrl: function(obj){
+			var promiseString = bucefalo.promise();
+			setTimeout(function(){
+				promiseString.succeed(obj.url);
+			},100);
+			return promiseString;
+		},
+		//getRepo :: String -> Promise String
+		getRepo: function(url){
+			var promiseString = bucefalo.promise();
+			setTimeout(function(){
+				promiseString.succeed(url.split("/")[4]);
+			}, 100);
+			return promiseString;
+		}
+	};
+
+	it("should allow me to pipe functions", function(done){
+		bucefalo.monads.promise.pipe([mock.readFile, mock.JSONparse, mock.getUrl, mock.getRepo])("path/").success(function(repo){
+			expect(repo).to.equal("bucefalo-utils");
+			done();
+		});
 	});
