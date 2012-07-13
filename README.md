@@ -21,6 +21,7 @@ How to use
 ### Dictionary 
 Some times you need a dictionary structure like any object in javascript but with out the need to loop it without the annoyning hasOwnProperty check inside,
 and even better with the speed of the indexOf native implemented in the array
+
 	var d = bucefalo.dictionary();
 	d.add("key1", "value1");
 	d.add("key2", "value2");
@@ -28,6 +29,7 @@ and even better with the speed of the indexOf native implemented in the array
 	d.indexOf("key2");
 	d.indexOf("key3");
 	d.indexOf("key1");
+
 ### Promise
 ### Cache
 ### Async Cache
