@@ -33,20 +33,27 @@ bucefalo.promise = function(val){
 					errorFn.push(fn);
 				}
 			},
-			then: function(fn){
+			then: function(succ, err){
 				if((error === undefined) && (value === undefined)){
-					errorFn.push(fn);
-					successFn.push(fn);
+					errorFn.push(err);
+					successFn.push(succ);
 				}else{
 					if(error !== undefined){
-						fn(error);
+						err(error);
 					}
 					if(value !== undefined){
-						fn(value);
+						succ(value);
 					}
 				}
 			}
 		};
+	p.protected = function(){
+		return {
+			success: p.success,
+			error: p.error,
+			then: p.then
+		};
+	};
 	p.onError = p.e = p.error;
 	p.onSuccess = p.s = p.success;
 	p.f = p.failed = p.fail;
