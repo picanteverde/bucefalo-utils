@@ -47,7 +47,7 @@ bucefalo.promise = function(val){
 				}
 			}
 		};
-	p.protected = function(){
+	p.promise = function(){
 		return {
 			success: p.success,
 			error: p.error,

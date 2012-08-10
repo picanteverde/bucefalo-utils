@@ -65,7 +65,8 @@ describe("Bucefalo Transformer", function(){
 						"select": "arrf2",
 						"where":{
 							"arrf1" : "value1"
-						}
+						},
+						"one": true
 					}
 				],
 				"f2": "field2"
@@ -141,8 +142,8 @@ describe("Bucefalo Transformer", function(){
 			res = t(obj);
 
 		expect(res.src[0].f1).to.equal("value1");
-		expect(res.src[1].f2).to.equal("value2");
-		expect(res.src[2].f1).to.equal("value3");
-		expect(res.src[3].f2).to.equal("value4");
+		expect(res.src[0].f2).to.equal("value2");
+		expect(res.src[1].f1).to.equal("value3");
+		expect(res.src[1].f2).to.equal("value4");
 	});
 });

@@ -20,7 +20,8 @@ module.exports = function(grunt) {
               'src/bucefalo.cache.async.js',
               'src/bucefalo.monads.js',
               'src/bucefalo.monads.list.js',
-              'src/bucefalo.monads.promise.js'
+              'src/bucefalo.monads.promise.js',
+              'src/bucefalo.transformer.js'
         ],
         dest: 'dist/<%= pkg.name %>.js'
       },
