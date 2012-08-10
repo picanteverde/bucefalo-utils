@@ -1,0 +1,3 @@
+bucefalo.transformer = function(definition){
+	
+};

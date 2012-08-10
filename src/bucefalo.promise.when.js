@@ -1,9 +1,10 @@
 bucefalo.promise.when = function(){
 	var p = bucefalo.promise(),
 		done = 0,
-		len = arguments.length,
-		i = len,
+		i = arguments.length,
+		len = i - 1,
 		idx,
+		fnx,
 		args = [],
 		fn = function(idx){
 			return function(){
@@ -15,8 +16,9 @@ bucefalo.promise.when = function(){
 			};
 		};
 	while(i--){
-		idx = len -1 -i;
-		arguments[idx].then(fn(idx));
+		idx = len - i;
+		fnx = fn(idx);
+		arguments[idx].then(fnx,fnx);
 	}
 	return p;
 };
