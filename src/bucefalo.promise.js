@@ -15,8 +15,10 @@ bucefalo.promise = function(val){
 				var i = errorFn.length;
 				error = err;
 				while(i--){
-					errorFn[i](err);
-				}	
+					if(errorFn[i] && typeof(errorFn[i]) === 'function'){
+						errorFn[i](err);
+					}
+				}
 			},
 			success: function(fn){
 				if(value !== undefined){
@@ -35,8 +37,8 @@ bucefalo.promise = function(val){
 			},
 			then: function(succ, err){
 				if((error === undefined) && (value === undefined)){
-					errorFn.push(err);
-					successFn.push(succ);
+					errorFn.push(err || function(){});
+					successFn.push(succ || function(){});
 				}else{
 					if(error !== undefined){
 						err(error);

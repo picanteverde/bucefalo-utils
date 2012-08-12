@@ -59,6 +59,8 @@ describe("Bucefalo Promise", function() {
 		var p = bucefalo.promise(),
 			p1 = bucefalo.promise();
 		p.then(function(val) {
+			throw new Error('should not been called');
+		},function(val) {
 			expect(val).to.equal("Error!");
 		});
 		p1.then(function(val) {
@@ -74,6 +76,8 @@ describe("Bucefalo Promise", function() {
 		var p = bucefalo.promise(),
 			p1 = bucefalo.promise();
 		p.then(function(val) {
+			throw new Error('should not been called');
+		},function(val) {
 			expect(val).to.equal("Error!");
 		});
 		p1.then(function(val) {
@@ -84,6 +88,8 @@ describe("Bucefalo Promise", function() {
 
 		//Subscribe to fullfilled promises
 		p.then(function(val) {
+			throw new Error('should not been called');
+		},function(val) {
 			expect(val).to.equal("Error!");
 		});
 		p1.then(function(val) {
