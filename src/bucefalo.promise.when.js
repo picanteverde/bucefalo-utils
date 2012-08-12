@@ -10,7 +10,7 @@ bucefalo.promise.when = function(){
 			return function(){
 				done += 1;
 				args[idx] = arguments;
-				if(done === len){
+				if(done === (len + 1)){
 					p.succeed(args);
 				}
 			};
