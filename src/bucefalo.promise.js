@@ -15,30 +15,36 @@ bucefalo.promise = function(val){
 				var i = errorFn.length;
 				error = err;
 				while(i--){
-					if(errorFn[i] && typeof(errorFn[i]) === 'function'){
-						errorFn[i](err);
-					}
+					errorFn[i](err);
 				}
 			},
 			success: function(fn){
-				if(value !== undefined){
-					fn(value);
-				}else{
-					//in case the promise is succeeded with undefined?
-					successFn.push(fn);
+				if(fn && typeof(fn) === 'function'){
+					if(value !== undefined){
+						fn(value);
+					}else{
+						//in case the promise is succeeded with undefined?
+						successFn.push(fn);
+					}
 				}
 			},
 			error: function(fn){
-				if(error !== undefined){
-					fn(error);
-				}else{
-					errorFn.push(fn);
+				if(fn && typeof(fn) === 'function'){
+					if(error !== undefined){
+						fn(error);
+					}else{
+						errorFn.push(fn);
+					}
 				}
 			},
 			then: function(succ, err){
 				if((error === undefined) && (value === undefined)){
-					errorFn.push(err || function(){});
-					successFn.push(succ || function(){});
+					if(err && typeof(err) === 'function'){
+						errorFn.push(err);
+					}
+					if(succ && typeof(succ) === 'function'){
+						successFn.push(succ);
+					}
 				}else{
 					if(error !== undefined){
 						err(error);
