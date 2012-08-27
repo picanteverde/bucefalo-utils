@@ -291,7 +291,7 @@ bucefalo.transformer = function(definition){
 		},
 		solveSelect = function(data, select){
 			var res, i, len;
-			if(select){
+			if(select && data){
 				res = [];
 				switch(typeof(select)){
 					case "object":
@@ -329,7 +329,7 @@ bucefalo.transformer = function(definition){
 							arr = getPath(data, query[0]);
 							arr = solveWhere(arr,query[1].where);
 							arr = solveSelect(arr, query[1].select);
-							if (query[1].one){
+							if (arr && query[1].one){
 								res[key] = arr[0];
 							}else{
 								res[key] = arr;
