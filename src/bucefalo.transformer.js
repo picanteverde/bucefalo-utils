@@ -48,7 +48,7 @@ bucefalo.transformer = function(definition){
 					case "string":
 						len = data.length;
 						for(i = 0 ;i < len; i += 1){
-							res.push(getPath(data[0], select));
+							res.push(getPath(data[i], select));
 						}
 						break;
 				}

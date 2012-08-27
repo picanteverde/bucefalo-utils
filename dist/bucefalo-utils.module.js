@@ -1,4 +1,4 @@
-/*! Bucefalo Utils - v0.1.0 - 2012-08-10
+/*! Bucefalo Utils - v0.1.0 - 2012-08-27
 * https://github.com/picanteverde/bucefalo-utils
 */
 
@@ -54,27 +54,35 @@ bucefalo.promise = function(val){
 				error = err;
 				while(i--){
 					errorFn[i](err);
-				}	
+				}
 			},
 			success: function(fn){
-				if(value !== undefined){
-					fn(value);
-				}else{
-					//in case the promise is succeeded with undefined?
-					successFn.push(fn);
+				if(fn && typeof(fn) === 'function'){
+					if(value !== undefined){
+						fn(value);
+					}else{
+						//in case the promise is succeeded with undefined?
+						successFn.push(fn);
+					}
 				}
 			},
 			error: function(fn){
-				if(error !== undefined){
-					fn(error);
-				}else{
-					errorFn.push(fn);
+				if(fn && typeof(fn) === 'function'){
+					if(error !== undefined){
+						fn(error);
+					}else{
+						errorFn.push(fn);
+					}
 				}
 			},
 			then: function(succ, err){
 				if((error === undefined) && (value === undefined)){
-					errorFn.push(err);
-					successFn.push(succ);
+					if(err && typeof(err) === 'function'){
+						errorFn.push(err);
+					}
+					if(succ && typeof(succ) === 'function'){
+						successFn.push(succ);
+					}
 				}else{
 					if(error !== undefined){
 						err(error);
@@ -110,7 +118,7 @@ bucefalo.promise.when = function(){
 			return function(){
 				done += 1;
 				args[idx] = arguments;
-				if(done === len){
+				if(done === (len + 1)){
 					p.succeed(args);
 				}
 			};
@@ -295,7 +303,7 @@ bucefalo.transformer = function(definition){
 					case "string":
 						len = data.length;
 						for(i = 0 ;i < len; i += 1){
-							res.push(getPath(data[0], select));
+							res.push(getPath(data[i], select));
 						}
 						break;
 				}
