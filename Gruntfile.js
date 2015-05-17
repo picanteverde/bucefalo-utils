@@ -27,7 +27,7 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.js'
       },
       module: {
-        src: ['<config:concat.dist.dest>', 'src/bucefalo.module.js'],
+        src: ['<%=concat.dist.dest%>', 'src/bucefalo.module.js'],
         dest: 'dist/<%= pkg.name %>.module.js'
       }
     },

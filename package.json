@@ -12,28 +12,24 @@
     "dictionary",
     "async",
     "queues",
-    "namespace",
     "transformer"
   ],
   "author": {
     "name": "Alejandro Hernandez (aka picanteverde)"
   },
-  "contributors": [
-    {
-      "name": "Alejandro Hernandez",
-      "email": "picanteverde@gmail.com",
-      "web": "http://picanteverde.wordpress.com/"
-    },
-    {
-      "name": "Mauricio Saglietto",
-      "email": "msaglietto@gmail.com"
-    }
-  ],
+  "contributors": [{
+    "name": "Alejandro Hernandez",
+    "email": "picanteverde@gmail.com",
+    "web": "http://picanteverde.wordpress.com/"
+  }, {
+    "name": "Mauricio Saglietto",
+    "email": "msaglietto@gmail.com"
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/picanteverde/bucefalo-utils.git"
   },
-  "main": "backbone.js",
+  "main": "dist/bucefalo-utils.module.js",
   "license": "MIT",
   "devDependencies": {
     "chai": ">= 2.3.0",
